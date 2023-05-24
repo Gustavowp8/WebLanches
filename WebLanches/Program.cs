@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using WebLanches.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<WebLanchesContext>(options => options.UseMySql(connection,
+    Microsoft.EntityFrameworkCore.ServerVersion.Parse("3.0.38-mysql")));
 
 var app = builder.Build();
 
