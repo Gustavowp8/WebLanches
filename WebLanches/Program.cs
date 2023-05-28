@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebLanches.Context;
+using WebLanches.Repositories;
+using WebLanches.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,13 @@ var connection = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<WebLanchesContext>(options => options.UseMySql(connection,
     Microsoft.EntityFrameworkCore.ServerVersion.Parse("3.0.38-mysql")));
 
+//Registro de dependencias
+builder.Services.AddTransient<ILancheRepository, LancheRepository>();
+builder.Services.AddTransient<ICategoriaRepositorio, CategoriaRepository>();
+
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
