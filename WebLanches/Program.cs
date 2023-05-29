@@ -17,6 +17,11 @@ builder.Services.AddDbContext<WebLanchesContext>(options => options.UseMySql(con
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepositorio, CategoriaRepository>();
 
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 var app = builder.Build();
 
 
@@ -31,6 +36,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

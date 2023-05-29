@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebLanches.Repositories.Interfaces;
+using WebLanches.ViewsModels;
 
 namespace WebLanches.Controllers
 {
@@ -19,8 +20,15 @@ namespace WebLanches.Controllers
         {
             ViewData["Titulo"] = "Todos os lanches";
             ViewData["Data"] = DateTime.Now;
+            /*
             var lanches = _lancheRepository.Lanches;
-            return View(lanches);
+            return View(lanches);*/
+
+            var lancheListViewModel = new LancheListViewModel();
+            lancheListViewModel.Lanches = _lancheRepository.Lanches;
+            lancheListViewModel.CategoriaAtual = "Categoria atual";
+
+            return View(lancheListViewModel);
         }
     }
 }

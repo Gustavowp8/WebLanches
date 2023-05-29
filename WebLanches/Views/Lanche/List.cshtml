@@ -1,14 +1,19 @@
-﻿@model IEnumerable<WebLanches.Models.Lanche>
+﻿@model LancheListViewModel
 
     <div>
-        <h2>@ViewData["Titulo"]</h2>
+        <h2>@Model.CategoriaAtual</h2>
     </div>
     <h3>@ViewData["Data"]</h3>
 
-    @foreach(var lanche in Model){
-        <div>
-            <h4>@lanche.Nome</h4>
-            <p><img id="iLanche" src="@lanche.ImagemThumbnailUrl"></p>
-            <h2>Preço : @lanche.Preco.ToString("c")</h2>
+    <div class="container">
+
+        <div class="row">
+
+        @foreach (var lanche in Model.Lanches)
+        {
+            <partial name="_LanchesResumo" for="@lanche"></partial>
+        }
+
         </div>
-    }
+
+    </div>
