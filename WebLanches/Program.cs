@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebLanches.Context;
+using WebLanches.Models;
 using WebLanches.Repositories;
 using WebLanches.Repositories.Interfaces;
 
@@ -16,6 +17,8 @@ builder.Services.AddDbContext<WebLanchesContext>(options => options.UseMySql(con
 //Registro de dependencias
 builder.Services.AddTransient<ILancheRepository, LancheRepository>();
 builder.Services.AddTransient<ICategoriaRepositorio, CategoriaRepository>();
+//Carrinho de compras
+builder.Services.AddScoped(sp => CarrinhoCompra.GetCarrinho(sp));
 
 builder.Services.AddMemoryCache();
 builder.Services.AddSession();
